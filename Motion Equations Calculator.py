@@ -2,6 +2,8 @@ import math
 
 Type = input(
     'Equations of motions (em) or Distance and speed equations (ds) or ? ')
+Answer = main(Type)
+print(Answer)
 
 
 def give(givens):
@@ -109,86 +111,86 @@ def eq4(a, b, c, d):
             answer = (float(b) - float(c))/float(a)
             return 'Time', answer*float(-1)
 
-
-if Type == 'ds':
-    which = input('Which equation (Displacement (d) or Velocity (v))? ')
-    if which == 'd':
-        Givens = input(
-            'Givens (order: s d t. If haven\'t got then put in ?): ')
-        a = give(Givens)
-        s = a[0]
-        d = a[1]
-        t = a[2]
-        answer = disvel(s, d, t, 'dis')
-        var = answer[0]
-        answer = answer[1]
-        print(f'{var} = {answer}')
-    elif which == 'v':
-        Givens = input(
-            'Givens (order: v s t. If haven\'t got then put in ?): ')
-        a = give(Givens)
-        v = a[0]
-        s = a[1]
-        t = a[2]
-        answer = disvel(v, s, t, 'vel')
-        var = answer[0]
-        answer = answer[1]
-        print(f'{var} = {answer}')
-elif Type == 'em':
-    which = input(
-        'Which equation (v=u+at (1) or s=ut+(1/2)at² (2) or v² = u² + 2as (3) or a = (v-u)/t (4)? ')
-    if which == '1':
-        Givens = input(
-            'Givens (order: v u a t. If haven\'t got then put in ?): ')
-        a = give(Givens)
-        t = a[3]
-        v = a[0]
-        u = a[1]
-        a = a[2]
-        answer = eq1(v, u, a, t)
-        var = answer[0]
-        answer = answer[1]
-        print(f'{var} = {answer}')
-    elif which == '2':
-        Givens = input(
-            'Givens (order: s u a t. If haven\'t got then put in ?): ')
-        a = give(Givens)
-        t = a[3]
-        s = a[0]
-        u = a[1]
-        a = a[2]
-        # t = a[3]
-        answer = eq2(s, u, a, t)
-        if answer == 'no':
-            print('Retry the program with another equation to find your variable.')
-        else:
+def main(Type):
+    if Type == 'ds':
+        which = input('Which equation (Displacement (d) or Velocity (v))? ')
+        if which == 'd':
+            Givens = input(
+                'Givens (order: s d t. If haven\'t got then put in ?): ')
+            a = give(Givens)
+            s = a[0]
+            d = a[1]
+            t = a[2]
+            answer = disvel(s, d, t, 'dis')
             var = answer[0]
             answer = answer[1]
-            print(f'{var} = {answer}')
-    elif which == '3':
-        Givens = input(
-            'Givens (order: v u a s. If haven\'t got then put in ?): ')
-        a = give(Givens)
-        s = a[3]
-        v = a[0]
-        u = a[1]
-        a = a[2]
-        answer = eq3(v, u, a, s)
-        if answer == 'no':
-            print('Retry the program with another equation to find your variable.')
-        else:
+            return (f'{var} = {answer}')
+        elif which == 'v':
+            Givens = input(
+                'Givens (order: v s t. If haven\'t got then put in ?): ')
+            a = give(Givens)
+            v = a[0]
+            s = a[1]
+            t = a[2]
+            answer = disvel(v, s, t, 'vel')
             var = answer[0]
             answer = answer[1]
-            print(f'{var} = {answer}')
-    elif which == '4':
-        Givens = input(
-            'Givens (order: a v u t. If haven\'t got then put in ?): ')
-        a = give(Givens)
-        t = a[3]
-        a = a[0]
-        v = a[1]
-        u = a[2]
-        answer = eq4(a, v, u, t)
-        var = answer[0]
-        answer = answer[1]
-        print(f'{var} = {answer}')
+            return (f'{var} = {answer}')
+    elif Type == 'em':
+        which = input(
+            'Which equation (v=u+at (1) or s=ut+(1/2)at² (2) or v² = u² + 2as (3) or a = (v-u)/t (4)? ')
+        if which == '1':
+            Givens = input(
+                'Givens (order: v u a t. If haven\'t got then put in ?): ')
+            a = give(Givens)
+            t = a[3]
+            v = a[0]
+            u = a[1]
+            a = a[2]
+            answer = eq1(v, u, a, t)
+            var = answer[0]
+            answer = answer[1]
+            return (f'{var} = {answer}')
+        elif which == '2':
+            Givens = input(
+                'Givens (order: s u a t. If haven\'t got then put in ?): ')
+            a = give(Givens)
+            t = a[3]
+            s = a[0]
+            u = a[1]
+            a = a[2]
+            # t = a[3]
+            answer = eq2(s, u, a, t)
+            if answer == 'no':
+                return ('Retry the program with another equation to find your variable.')
+            else:
+                var = answer[0]
+                answer = answer[1]
+                return (f'{var} = {answer}')
+        elif which == '3':
+            Givens = input(
+                'Givens (order: v u a s. If haven\'t got then put in ?): ')
+            a = give(Givens)
+            s = a[3]
+            v = a[0]
+            u = a[1]
+            a = a[2]
+            answer = eq3(v, u, a, s)
+            if answer == 'no':
+                return ('Retry the program with another equation to find your variable.')
+            else:
+                var = answer[0]
+                answer = answer[1]
+                return (f'{var} = {answer}')
+        elif which == '4':
+            Givens = input(
+                'Givens (order: a v u t. If haven\'t got then put in ?): ')
+            a = give(Givens)
+            t = a[3]
+            a = a[0]
+            v = a[1]
+            u = a[2]
+            answer = eq4(a, v, u, t)
+            var = answer[0]
+            answer = answer[1]
+            return (f'{var} = {answer}')
