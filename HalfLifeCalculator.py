@@ -1,9 +1,5 @@
 import math
 
-Type = input('What Type (A, N, M)? ')
-Answer = main(Type)
-print(Answer)
-
 
 def give(givens):
     a = []
@@ -35,6 +31,7 @@ def needsxo(half, t, x):
     return answer
 
 def main(Type):
+    Type = input('What Type (A, N, M)? ')
     Givens = input(
         'Givens (order: t 1/2, t, X, Xo. If haven\'t got then put in ?) ')
     a = give(Givens)

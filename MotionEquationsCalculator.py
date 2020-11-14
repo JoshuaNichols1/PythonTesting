@@ -1,9 +1,9 @@
 import math
 
-Type = input(
-    'Equations of motions (em) or Distance and speed equations (ds) or ? ')
-Answer = main(Type)
-print(Answer)
+# Type = input(
+#     'Equations of motions (em) or Distance and speed equations (ds) or ? ')
+# Answer = main(Type)
+# print(Answer)
 
 
 def give(givens):
@@ -113,7 +113,7 @@ def eq4(a, b, c, d):
 
 def main(Type):
     if Type == 'ds':
-        which = input('Which equation (Displacement (d) or Velocity (v))? ')
+        which = input('Which equation (Displacement (d) or Velocity (v) )? ')
         if which == 'd':
             Givens = input(
                 'Givens (order: s d t. If haven\'t got then put in ?): ')
@@ -138,7 +138,7 @@ def main(Type):
             return (f'{var} = {answer}')
     elif Type == 'em':
         which = input(
-            'Which equation (v=u+at (1) or s=ut+(1/2)at² (2) or v² = u² + 2as (3) or a = (v-u)/t (4)? ')
+            'Which equation (v=u+at (1) or s=ut+(1/2)at² (2) or v² = u² + 2as (3) or a = (v-u)/t (4) )? ')
         if which == '1':
             Givens = input(
                 'Givens (order: v u a t. If haven\'t got then put in ?): ')
