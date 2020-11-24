@@ -2,9 +2,7 @@ import math
 
 
 def mass(am, mn, an):
-    protons = an*1.007276470
-    neutrons = (mn-an)*1.00866491588
-    mass = (protons + neutrons) - am
+    protons, neutrons, mass = an*1.007276470, (mn-an)*1.00866491588, (protons + neutrons) - am
     if mass * -1 > mass:
         mass = mass*-1
         return str(protons), str(neutrons), str(mass)
@@ -25,37 +23,29 @@ def pernuc(am, mn, an):
 
 
 def m(am, mn, an, es):
-    SUB = str.maketrans("0123456789", "₀₁₂₃₄₅₆₇₈₉")
-    SUP = str.maketrans("0123456789", "⁰¹²³⁴⁵⁶⁷⁸⁹")
+    SUB, SUP = str.maketrans("0123456789", "₀₁₂₃₄₅₆₇₈₉"), str.maketrans("0123456789", "⁰¹²³⁴⁵⁶⁷⁸⁹")
     finalmass = mass(float(am), float(mn), float(an))
-    protonm, neutronm, finalmass = finalmass[0]
-    = finalmass[1]
-    = finalmass[2]
-    neutron = int(mn)-int(an)
+    protonm, neutronm, finalmass, neutron = finalmass[0], finalmass[1], finalmass[2], int(mn)-int(an)
     print(f'\n{mn.translate(SUP)}{an.translate(SUB)}{es} + BE -> {an} {str(1).translate(SUP)}{str(1).translate(SUB)}P + {str(neutron)} {str(1).translate(SUP)}{str(0).translate(SUB)}N\nΔm = |RHS - LHS|\nΔm = ({str(protonm)} + {str(neutronm)}) - {am}\nΔm = {str(finalmass)}')
 
 
 def be(am, mn, an):
     Binding = BE(float(am), float(mn), float(an))
-    massfinal = Binding[0]
-    Binding = Binding[1]
+    massfinal, Binding = Binding[0], Binding[1]
     print(f'\n∴ BE = Δm x 931.5\n= {massfinal} x 931.5\n= {Binding} MeV')
 
 
 def mev(am, mn, an):
     answer = pernuc(float(am), float(mn), float(an))
-    Binding = answer[0]
-    answer = answer[1]
+    Binding, answer = answer[0], answer[1]
     print(f'\nPer Nucleon = MeV/nuc\n= {Binding}/{mn}\n= {answer} MeV/nuc')
 
 
-def main():
-    type = input('Mass, Binding Energy, MeV/Nuc or all (m, be, mev, all)? ')
+def main(Type):
+    Type = input('Mass, Binding Energy, MeV/Nuc or all (m, be, mev, all)? ')
     variables = input(
         'Isotope (atomic mass, mass number, atomic number, Element Symbol): ')
-    prev = ''
-    fin = []
-    ii = 0
+    prev, fin, ii = '', [], 0
     for i in variables:
         ii += 1
         if i == ' ':
@@ -67,13 +57,13 @@ def main():
         else:
             prev += i
     am, mn, an, es = fin[0], fin[1], fin[2], fin[3]
-    if type == 'm':
+    if Type == 'm':
         m(am, mn, an, es)
-    elif type == 'be':
+    elif Type == 'be':
         be(am, mn, an)
-    elif type == 'mev':
+    elif Type == 'mev':
         mev(am, mn, an)
-    elif type == 'all':
+    elif Type == 'all':
         m(am, mn, an, es)
         be(am, mn, an)
         mev(am, mn, an)
