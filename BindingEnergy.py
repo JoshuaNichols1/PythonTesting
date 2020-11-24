@@ -2,7 +2,8 @@ import math
 
 
 def mass(am, mn, an):
-    protons, neutrons, mass = an*1.007276470, (mn-an)*1.00866491588, (protons + neutrons) - am
+    protons, neutrons,  = an*1.007276470, (mn-an)*1.00866491588
+    mass = (protons + neutrons) - am
     if mass * -1 > mass:
         mass = mass*-1
         return str(protons), str(neutrons), str(mass)
@@ -68,6 +69,3 @@ def main(Type):
         be(am, mn, an)
         mev(am, mn, an)
     print('')
-
-
-main()

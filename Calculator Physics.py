@@ -16,4 +16,3 @@ elif k == 'hl':
     print(answer)
 elif k == 'be':
     answer = be.main(k)
-    print(answer)

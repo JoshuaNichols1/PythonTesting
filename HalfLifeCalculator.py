@@ -1,9 +1,7 @@
 import math
 
-
 def give(givens):
-    a = []
-    g = givens.split()
+    a, g = [], givens.split()
     for i in g:
         a.append(i)
     return a
@@ -30,22 +28,25 @@ def needsxo(half, t, x):
     answer = float(x)/((1/2) ** (t/half))
     return answer
 
+def halftime(half, time, X, Xo):
+    if half == '?':
+        answer = needshalf(float(time), float(X), float(Xo))
+        return (f'Half-Life = {answer}')
+    elif time == '?':
+        answer = needst(float(half), float(X), float(Xo))
+        return (f'Time = {answer}')
+
 def main(Type):
     Type = input('What Type (A, N, M)? ')
     Givens = input(
         'Givens (order: t 1/2, t, X, Xo. If haven\'t got then put in ?) ')
     a = give(Givens)
-    half = a[0]
-    time = a[1]
-    X = a[2]
-    Xo = a[3]
+    half, time, X, Xo = a[0], a[1], a[2], a[3]
     if Type == 'A':
         if half == '?':
-            answer = needshalf(float(time), float(X), float(Xo))
-            return (f'Half-Life = {answer}')
+            return halftime(half, time, X, Xo)
         elif time == '?':
-            answer = needst(float(half), float(X), float(Xo))
-            return (f'Time = {answer}')
+            return halftime(half, time, X, Xo)
         elif X == '?':
             answer = needsx(float(half), float(time), float(Xo))
             return (f'Activity = {answer}')
@@ -54,11 +55,9 @@ def main(Type):
             return (f'Original Activity = {answer}')
     elif Type == 'N':
         if half == '?':
-            answer = needshalf(float(time), float(X), float(Xo))
-            return (f'Half-Life = {answer}')
+            return halftime(half, time, X, Xo)
         elif time == '?':
-            answer = needst(float(half), float(X), float(Xo))
-            return (f'Time = {answer}')
+            return halftime(half, time, X, Xo)
         elif X == '?':
             answer = needsx(float(half), float(time), float(Xo))
             return (f'Number of Nuclei = {answer}')
@@ -67,11 +66,9 @@ def main(Type):
             return (f'Original Number of Nuclei = {answer}')
     elif Type == 'M':
         if half == '?':
-            answer = needshalf(float(time), float(X), float(Xo))
-            return (f'Half-Life = {answer}')
+            return halftime(half, time, X, Xo)
         elif time == '?':
-            answer = needst(float(half), float(X), float(Xo))
-            return (f'Time = {answer}')
+            return halftime(half, time, X, Xo)
         elif X == '?':
             answer = needsx(float(half), float(time), float(Xo))
             return (f'Mass = {answer}')
