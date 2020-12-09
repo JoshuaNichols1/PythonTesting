@@ -23,6 +23,8 @@ def first2(x):
                 k = 12
                 x = str(k) + x[2:]
                 return (x + 'am')
+            elif prev == '12':
+                return (x + 'pm')
             else:
                 return (x + 'am')
         else:
