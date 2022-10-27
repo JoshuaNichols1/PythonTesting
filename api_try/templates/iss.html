@@ -1,0 +1,79 @@
+{%extends 'template.html'%}
+<!-- space -->
+{%block title%}When ISS goes over us{%endblock%}
+<!-- space -->
+{%block content%}
+<!-- space -->
+<br>
+<div class="container-fluid">
+    <h4><b>Location:</b></h4>
+    <div id="map" class="map"></div>
+    <div id="popup" class="ol-popup">
+        <a href="#" id="popup-closer" class="ol-popup-closer"></a>
+        <div id="popup-content"></div>
+    </div>
+    <script type="text/javascript">
+        var lon = "{{lon}}";
+        var lat = "{{lat}}";
+        var map = new ol.Map({
+            target: 'map',
+            layers: [
+                new ol.layer.Tile({
+                    source: new ol.source.OSM()
+                })
+            ],
+            view: new ol.View({
+                center: ol.proj.fromLonLat([lon, lat]),
+                zoom: 13
+            })
+        });
+        var layer = new ol.layer.Vector({
+            source: new ol.source.Vector({
+                features: [
+                    new ol.Feature({
+                        geometry: new ol.geom.Point(ol.proj.fromLonLat([lon, lat]))
+                    })
+                ]
+            })
+        });
+        map.addLayer(layer);
+        var container = document.getElementById('popup');
+        var content = document.getElementById('popup-content');
+        var closer = document.getElementById('popup-closer');
+
+        var overlay = new ol.Overlay({
+            element: container,
+            autoPan: true,
+            autoPanAnimation: {
+                duration: 250
+            }
+        });
+        map.addOverlay(overlay);
+
+        closer.onclick = function() {
+            overlay.setPosition(undefined);
+            closer.blur();
+            return false;
+        };
+        map.on('singleclick', function(event) {
+            if (map.hasFeatureAtPixel(event.pixel) === true) {
+                var coordinate = event.coordinate;
+
+                content.innerHTML = '<b>Hello world!</b><br />I am a popup.';
+                overlay.setPosition(coordinate);
+            } else {
+                overlay.setPosition(undefined);
+                closer.blur();
+            }
+        });
+        content.innerHTML = '<b>Longitude: </b>{{lon}}<br><b>Latitude: </b>{{lat}}';
+        overlay.setPosition(ol.proj.fromLonLat([lon, lat]));
+    </script>
+
+    <br>
+    <h4><b>Duration:</b> {{dur_p}} minutes</h4>
+    <h4><b>Risetime:</b> {{ris_t}}</h4>
+    <h4><b>Risedate:</b> {{ris_d}}</h4>
+</div>
+<!-- space -->
+{%endblock%}

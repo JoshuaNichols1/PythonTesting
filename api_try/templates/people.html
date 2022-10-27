@@ -1,0 +1,25 @@
+{%extends 'template.html'%}
+<!-- space -->
+{%block title%}People currently in space{%endblock%}
+<!-- space -->
+{%block content%}
+<!-- space -->
+<br>
+<!-- space -->
+{%for i in iss_data%}
+<div class="container-fluid">
+    <h4>
+        <b>Name:</b> {{i}} <b>|</b> <b>Ship:</b> {{iss_data[i]}} <b>|</b> <b>Image:</b> <img src="{{iss_img_dict[i]}}" width="auto" height="125">
+    </h4>
+</div>
+<!-- space -->
+{%endfor%} {%for i in other_data%}
+<!-- space -->
+<div class="container-fluid">
+    <h4>
+        <b>Name:</b> {{i}} <b>|</b> <b>Ship:</b> {{other_data[i]}} <b>|</b> <b>Image:</b> <img src="{{other_img_dict[i]}}" width="auto" height="125">
+    </h4>
+</div>
+{%endfor%}
+<!-- space -->
+{%endblock%}

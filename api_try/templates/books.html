@@ -1,0 +1,18 @@
+{%extends 'template.html'%}
+<!-- space -->
+{%block title%}Books{%endblock%}
+<!-- space -->
+{%block content%}
+<!-- space -->
+<br>
+<div class="container">
+    <div class="row">
+        {%for book_id in book_ids%}
+        <!-- space -->
+        <img src="{{images_dict[book_id]}}" alt="" style="padding:3%;">
+        <!-- space -->
+        {%endfor%}
+    </div>
+</div>
+<!-- space -->
+{%endblock%}

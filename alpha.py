@@ -1,5 +1,5 @@
-inputf = open('input.txt', 'r')
-outputf = open('output.txt', 'w')
+inputf = open("input.txt", "r")
+outputf = open("output.txt", "w")
 lines = []
 # for i in inputf:
 #     i = i.strip()
@@ -39,9 +39,9 @@ dictionary = {
     "million": 1000000,
     "billion": 1000000000,
     "trillion": 1000000000000,
-    "plus": '+',
-    "minus": '-',
-    "times": 'x',
+    "plus": "+",
+    "minus": "-",
+    "times": "x",
 }
 ii = 0
 final = []
@@ -49,7 +49,7 @@ for item in inputf:
     ii += 1
     item = item.strip()
     words = item.split()
-    newline = ''
+    newline = ""
     done = 1
     num1 = 0
     num2 = 0
@@ -59,34 +59,34 @@ for item in inputf:
     for item in words:
         i += 1
         k = dictionary.get(item)
-        if item == 'and':
-            newline += ''
+        if item == "and":
+            newline += ""
         elif type(k) == int:
             if i == leng:
                 if k > 90:
-                    num2 += int(k*upto)
+                    num2 += int(k * upto)
                 else:
                     num2 += int(k)
                 fin2 = num2 + upto
-                newline += str(fin2) + ' '
+                newline += str(fin2) + " "
             if done > 0:
                 if k > 90:
-                    num1 += int(k*upto)
+                    num1 += int(k * upto)
                     upto = 0
                 else:
                     upto += k
             elif done == 0:
                 if k > 90:
-                    num2 += int(k*upto)
+                    num2 += int(k * upto)
                     upto = 0
                 else:
                     upto += k
         elif type(k) == str:
             done = 0
             fin = num1 + upto
-            newline += str(fin) + ' '
-            newline += k + ' '
+            newline += str(fin) + " "
+            newline += k + " "
             upto = 0
     # newline = [dictionary.get(item) for item in words]
     final.append(newline)
-print('\n'.join(final[:-1]))
+print("\n".join(final[:-1]))
