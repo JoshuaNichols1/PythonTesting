@@ -9,6 +9,7 @@ scope = "playlist-modify-private"
 
 SPOTIPY_CLIENT_ID='7f2442a7ef094bff8163f12f04db8a34'
 SPOTIPY_CLIENT_SECRET='1ea0aad429944fea81d9af7ac94e5652'
+spotify_access_token = "BQBRV216YYcA3X2EYILZ8-DRQEvRy4IM_7q-6m5rPb4PwpvbASBXsKAL7e49Bu-bsBWO2lZNalRRCyCH7WTEA9ETTyd62y0AwrFpRyTdjciDfi-1xdVGFgu9kg00K7nOwXYNiN31gufe4rDMhJqJqYRHkjlGP-hIEud1R9o"
 auth_manager = SpotifyClientCredentials(SPOTIPY_CLIENT_ID, SPOTIPY_CLIENT_SECRET)
 sp = spotipy.Spotify(auth_manager=SpotifyOAuth(scope=scope))
 # auth_manager=auth_manager,
@@ -16,7 +17,7 @@ yt = YTMusic()
 # playlists = yt.get_library_playlists()
 # print(playlists)
 # playlistId = yt.create_playlist('test', 'test description')
-search_results = yt.get_playlist('PLW2yev_gAPHJ99aW4kHYWo_sQkh7e0K9J')
+search_results = yt.get_playlist('PLW2yev_gAPHJ99aW4kHYWo_sQkh7e0K9J', limit=953)
 tracks = list(search_results["tracks"])
 done = []
 for i in tracks:
@@ -45,11 +46,11 @@ for i in tracks:
             cont = False
         iterator += 1
     url_word = '+'.join(title_arr)
-    result = requests.get(f"""https://api.spotify.com/v1/search?q=track%3A{url_word}%20artist%3A{url_artist}&type=track,artist&limit=1&access_token=BQA5Go-JGzqgn6dkReLo3HlYvXZpghKXuiOl1xTaNgx4hAqTDa76sov2mi6qbA_WQk9uZuV5ScaBqxAeXF_sg4mGgSlC_qvJafx8glCZxUS5DZ3yr3QBWM4vn-4OtQXSq_amT8SW4uoD1bd475BnosaG2mwcFWgzbJfESHg""")
-    data = json.loads(result.text)
-    found_track = data["tracks"]
+    result = requests.get(f"""https://api.spotify.com/v1/search?q=track%3A{url_word}%20artist%3A{url_artist}&type=track,artist&limit=1&access_token={spotify_access_token}""")
+    result = json.loads(result.text)
+    found_track = result["tracks"]
     if found_track["total"] == 0:
-        result = requests.get(f"""https://api.spotify.com/v1/search?q=track%3A{url_word}&type=track,artist&limit=1&access_token=BQA5Go-JGzqgn6dkReLo3HlYvXZpghKXuiOl1xTaNgx4hAqTDa76sov2mi6qbA_WQk9uZuV5ScaBqxAeXF_sg4mGgSlC_qvJafx8glCZxUS5DZ3yr3QBWM4vn-4OtQXSq_amT8SW4uoD1bd475BnosaG2mwcFWgzbJfESHg""")
+        result = requests.get(f"""https://api.spotify.com/v1/search?q=track%3A{url_word}&type=track,artist&limit=1&access_token={spotify_access_token}""")
         data = json.loads(result.text)
         found_track = data["tracks"]
     # print(found_track)
