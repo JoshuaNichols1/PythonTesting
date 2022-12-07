@@ -5,11 +5,11 @@ from ytmusicapi import YTMusic
 from spotipy.oauth2 import SpotifyClientCredentials
 from spotipy.oauth2 import SpotifyOAuth
 
-scope = "playlist-modify-private"
+scope = "playlist-modify-private,user-follow-modify,user-library-modify"
 
 SPOTIPY_CLIENT_ID='7f2442a7ef094bff8163f12f04db8a34'
 SPOTIPY_CLIENT_SECRET='1ea0aad429944fea81d9af7ac94e5652'
-spotify_access_token = "BQCFa2vKFYJ4Vb8GTWzP0A8KcjmASrRz6axGU3p6o7lN66EPD-vA5kstC5q_O3NhoXSmRo_TBeB1CM_l0jgPfCxDVhvh6C4cEzeAjyLMp6o1b4KGXsnIQe8Fk0n8AE2-GC1HnkWDBLVGOwoFKK9qMpPJVHQbko6TyjM8dRM"
+spotify_access_token = "BQBNcT2XXo2b9ZTyPugr1F34c6HYADPXWI2hBdPLcThp08vzU3SQiA4uJP7iug_GdYjtDam5P-Eyz0bjPSaYpRKNtU4kevIgklUmv8-gB240AkYrjWHngFFSzypI0Ul51qh1WP7ZAeHpF6oDVoWhAYhDPPMj_fIvkyLI4jM"
 auth_manager = SpotifyClientCredentials(SPOTIPY_CLIENT_ID, SPOTIPY_CLIENT_SECRET)
 sp = spotipy.Spotify(auth_manager=SpotifyOAuth(scope=scope))
 yt = YTMusic()
@@ -50,4 +50,12 @@ for i in tracks:
     for n in found_track_further:
         track_id = n["id"]
     sp.playlist_add_items("5d8GiPsKFrWho9LxqDSZQT", [track_id], position=None)
+    sp.current_user_saved_tracks_add([track_id])
     done.append(track_id)
+    result = requests.get(f"""https://api.spotify.com/v1/search?q=artist%3A{url_artist}&type=artist&limit=1&access_token={spotify_access_token}""")
+    result = json.loads(result.text)
+    found_artist = result["artists"]
+    found_artist_further = found_artist["items"]
+    for n in found_artist_further:
+        artist_id = n["id"]
+    sp.user_follow_artists([artist_id])
