@@ -12,7 +12,7 @@ SPOTIPY_CLIENT_SECRET='1ea0aad429944fea81d9af7ac94e5652'
 spotify_access_token = "BQBNcT2XXo2b9ZTyPugr1F34c6HYADPXWI2hBdPLcThp08vzU3SQiA4uJP7iug_GdYjtDam5P-Eyz0bjPSaYpRKNtU4kevIgklUmv8-gB240AkYrjWHngFFSzypI0Ul51qh1WP7ZAeHpF6oDVoWhAYhDPPMj_fIvkyLI4jM"
 auth_manager = SpotifyClientCredentials(SPOTIPY_CLIENT_ID, SPOTIPY_CLIENT_SECRET)
 sp = spotipy.Spotify(auth_manager=SpotifyOAuth(scope=scope))
-yt = YTMusic()
+yt = YTMusic("headers_auth.json")
 search_results = yt.get_playlist('PLW2yev_gAPHJ99aW4kHYWo_sQkh7e0K9J', limit=953)
 tracks = list(search_results["tracks"])
 done = []
