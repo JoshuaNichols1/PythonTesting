@@ -9,14 +9,10 @@ scope = "playlist-modify-private"
 
 SPOTIPY_CLIENT_ID='7f2442a7ef094bff8163f12f04db8a34'
 SPOTIPY_CLIENT_SECRET='1ea0aad429944fea81d9af7ac94e5652'
-spotify_access_token = "BQBRV216YYcA3X2EYILZ8-DRQEvRy4IM_7q-6m5rPb4PwpvbASBXsKAL7e49Bu-bsBWO2lZNalRRCyCH7WTEA9ETTyd62y0AwrFpRyTdjciDfi-1xdVGFgu9kg00K7nOwXYNiN31gufe4rDMhJqJqYRHkjlGP-hIEud1R9o"
+spotify_access_token = "BQCFa2vKFYJ4Vb8GTWzP0A8KcjmASrRz6axGU3p6o7lN66EPD-vA5kstC5q_O3NhoXSmRo_TBeB1CM_l0jgPfCxDVhvh6C4cEzeAjyLMp6o1b4KGXsnIQe8Fk0n8AE2-GC1HnkWDBLVGOwoFKK9qMpPJVHQbko6TyjM8dRM"
 auth_manager = SpotifyClientCredentials(SPOTIPY_CLIENT_ID, SPOTIPY_CLIENT_SECRET)
 sp = spotipy.Spotify(auth_manager=SpotifyOAuth(scope=scope))
-# auth_manager=auth_manager,
 yt = YTMusic()
-# playlists = yt.get_library_playlists()
-# print(playlists)
-# playlistId = yt.create_playlist('test', 'test description')
 search_results = yt.get_playlist('PLW2yev_gAPHJ99aW4kHYWo_sQkh7e0K9J', limit=953)
 tracks = list(search_results["tracks"])
 done = []
@@ -25,9 +21,6 @@ for i in tracks:
     for person in artists:
         artist = person["name"]
         break
-    # query = f'{i["title"]} {artist}'
-    # result = sp.search(q=query, type='track', limit=1)
-    # result = sp.search(q=f'track:"{i["title"]}"', limit=1, offset=0, type='track', market=None)
     url_artist = []
     title = i["title"]
     for word in artist.split():
@@ -53,16 +46,8 @@ for i in tracks:
         result = requests.get(f"""https://api.spotify.com/v1/search?q=track%3A{url_word}&type=track,artist&limit=1&access_token={spotify_access_token}""")
         data = json.loads(result.text)
         found_track = data["tracks"]
-    # print(found_track)
-    # print("")
     found_track_further = found_track["items"]
     for n in found_track_further:
         track_id = n["id"]
-    # if track_id not in done:
     sp.playlist_add_items("5d8GiPsKFrWho9LxqDSZQT", [track_id], position=None)
     done.append(track_id)
-    
-    # %20album:"{album_name}"
-# print(sp.search(q=f"track:{", limit=10, offset=0, type='track', market=None))
-# print(search_results[0])
-# yt.add_playlist_items(playlistId, [search_results[0]['videoId']])
