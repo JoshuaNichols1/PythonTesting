@@ -2,8 +2,6 @@ import random
 import math
 import pyperclip as pc
 
-# outputf = open("output.txt", "w")
-
 lower = "abcdefghijklmnopqrstuvwxyz"
 upper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 nums = "1234567890"
@@ -14,10 +12,16 @@ length = int(input("What password length do you want? "))
 if length <= 0:
     print("The password length was either zero or a negative")
 else:
-    qlower = input('Include Lowercase letters (Leave blank for no, use "Y" for yes)? ')
-    qupper = input('Include Uppercase letters (Leave blank for no, use "Y" for yes)? ')
+    qlower = input(
+        'Include Lowercase letters (Leave blank for no, use "Y" for yes)? '
+    )
+    qupper = input(
+        'Include Uppercase letters (Leave blank for no, use "Y" for yes)? '
+    )
     qnums = input('Include Numbers (Leave blank for no, use "Y" for yes)? ')
-    qpunc = input('Include Punctuation (Leave blank for no, use "Y" for yes)? ')
+    qpunc = input(
+        'Include Punctuation (Leave blank for no, use "Y" for yes)? '
+    )
 
     if qlower != "Y":
         lower = ""
