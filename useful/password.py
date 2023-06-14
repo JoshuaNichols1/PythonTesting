@@ -2,42 +2,30 @@ import random
 import math
 import pyperclip as pc
 
-lower = "abcdefghijklmnopqrstuvwxyz"
-upper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-nums = "1234567890"
-punc = "`~,./;[]-=!@#$%^&*()_+{}:<>?"
+LOWER = "abcdefghijklmnopqrstuvwxyz"
+UPPER = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+NUMS = "1234567890"
+PUNC = """"'`~,./;[]-=!@#$%^&*()_+{}:<>?"""
 
-length = int(input("What password length do you want? "))
 
-if length <= 0:
-    print("The password length was either zero or a negative")
-else:
-    qlower = input(
-        'Include Lowercase letters (Leave blank for no, use "Y" for yes)? '
-    )
-    qupper = input(
-        'Include Uppercase letters (Leave blank for no, use "Y" for yes)? '
-    )
-    qnums = input('Include Numbers (Leave blank for no, use "Y" for yes)? ')
-    qpunc = input(
-        'Include Punctuation (Leave blank for no, use "Y" for yes)? '
-    )
+def password(length=8, lower=LOWER, upper=UPPER, nums=NUMS, punc=PUNC):
+    """
+    For each character type do e.g. lower="" if you don't want lower case.
+    Default password length is 8 characters.
+    Length must be greater than 4.
+    Password is copied to clipboard.
+    """
 
-    if qlower != "Y":
-        lower = ""
-    if qupper != "Y":
-        upper = ""
-    if qnums != "Y":
-        nums = ""
-    if qpunc != "Y":
-        punc = ""
+    if length <= 4:
+        print("The password length was either zero or a negative")
+        return None
 
-    all = lower + upper + nums + punc
+    all = LOWER + UPPER + NUMS + PUNC
     num = len(all)
+    all = all * math.ceil(length / num)
+    password = "".join(random.sample(all, length))
+    pc.copy(password)
+    return password
 
-    if num == 0:
-        print("You included no character types in password")
-    else:
-        all = all * math.ceil(length / num)
-        password = "".join(random.sample(all, length))
-        pc.copy(password)
+
+print(password(40))
